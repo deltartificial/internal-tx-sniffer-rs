@@ -21,8 +21,8 @@ impl std::str::FromStr for SearchType {
 
 pub fn search_deployment_type(frame: &CallFrame, search_type: SearchType) -> bool {
     match search_type {
-        SearchType::Create2 => frame.typ.as_ref().map(|s| s.as_str()) == Some("CREATE2"),
-        SearchType::Create3 => frame.typ.as_ref().map(|s| s.as_str()) == Some("CREATE3"),
+        SearchType::Create2 => frame.typ == "CREATE2",
+        SearchType::Create3 => frame.typ == "CREATE3",
     }
 }
 
@@ -36,12 +36,11 @@ pub fn analyze_call_frame(frame: &CallFrame, search_type: Option<SearchType>) ->
                 format!("{:?}", search_type),
                 frame.from,
                 frame.to,
-                frame.value.unwrap_or_else(|| U256::ZERO)
+                frame.value.unwrap_or(U256::ZERO)
             ));
         }
     }
 
-    // Recursively analyze nested calls
     for call in &frame.calls {
         findings.extend(analyze_call_frame(call, search_type));
     }

@@ -28,9 +28,10 @@ pub async fn trace_transaction(rpc_url: &str, hash: B256, search: Option<SearchT
     
     let result = provider.debug_trace_transaction(hash, call_options).await?;
     
-    let mut call_file = File::create("call_trace.txt")?;
+    std::fs::create_dir_all("out")?;
+    let mut call_file = File::create("out/call_trace.txt")?;
     write!(call_file, "{:#?}", result)?;
-    println!("Call trace saved to call_trace.txt");
+    println!("Call trace saved to out/call_trace.txt");
 
     if let Some(search_type) = search {
         if let alloy::rpc::types::trace::geth::GethTrace::CallTracer(result_frame) = result {
