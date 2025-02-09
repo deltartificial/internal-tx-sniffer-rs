@@ -31,13 +31,15 @@ pub fn analyze_call_frame(frame: &CallFrame, search_type: Option<SearchType>) ->
     
     if let Some(search_type) = search_type {
         if search_deployment_type(frame, search_type) {
-            findings.push(format!(
-                "Found {} deployment:\nFrom: {:#x}\nTo: {:#x?}\nValue: {:#x?}",
-                format!("{:?}", search_type),
-                frame.from,
-                frame.to,
-                frame.value.unwrap_or(U256::ZERO)
-            ));
+            if let Some(to_addr) = frame.to {
+                findings.push(format!(
+                    "Found {} deployment:\nTo: {:#x}\nFrom: {:#x}\nValue: {:#x?}",
+                    format!("{:?}", search_type),
+                    to_addr,
+                    frame.from,
+                    frame.value.unwrap_or(U256::ZERO)
+                ));
+            }
         }
     }
 
