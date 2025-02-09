@@ -1,0 +1,28 @@
+[package]
+name = "internal-tx-sniffer-rs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.39.0", features = ["full"] }
+eyre = "0.6.10"
+alloy = { version = "0.11", features = [
+    "eips",
+    "full",
+    "hyper",
+    "json-rpc",
+    "node-bindings",
+    "rpc-client",
+    "rpc-types-debug",
+    "rpc-types-trace",
+    "signer-aws",
+    "signer-gcp",
+    "signer-keystore",
+    "signer-ledger",
+    "signer-mnemonic",
+    "signer-trezor",
+    "signer-yubihsm",
+] }
+clap = { version = "4.5", features = ["derive", "env"] }
+url = "2.4.2"
+alloy-transport-http = "0.11"

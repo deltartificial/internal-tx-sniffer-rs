@@ -1,0 +1,1 @@
+cargo run -- --rpc-url https://nd-418-459-126.p2pify.com/8763cb5a211e1d4345acd51bde484c00/ext/bc/C/rpc --hash 0xb7a88c16d7b8b06b9cd4a9666a9c9a5cd0cb89aba050f6bb383e0740531c8fa0
